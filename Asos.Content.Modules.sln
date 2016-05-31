@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asos.Content.Modules.PublishViewer", "Asos.Content.Modules.PublishViewer\Asos.Content.Modules.PublishViewer.csproj", "{076C8DDE-DFB4-4A67-8832-2AE1FDC34D18}"
 EndProject
-Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.PublishViewer.Data.Core", "Asos.Content.Modules.PublishViewer.Data.Master\Asos.Content.Modules.PublishViewer.Data.Core.scproj", "{070F0897-BA07-4B28-8DD3-E246DEEAE7A0}"
+Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.PublishViewer.Data.Core", "Asos.Content.Modules.PublishViewer.Data.Core\Asos.Content.Modules.PublishViewer.Data.Core.scproj", "{070F0897-BA07-4B28-8DD3-E246DEEAE7A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

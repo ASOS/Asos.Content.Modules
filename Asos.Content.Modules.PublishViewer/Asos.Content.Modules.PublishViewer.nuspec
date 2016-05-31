@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Asos.Content.Modules.PublishViewer</id>
+    <version>0.0.0</version>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>Asos Content Modules Publish Viewer Shared Source</tags>
+    <description>Adds dialog to view sitecore jobs queue.</description>
+    <authors>ASOS</authors>
+  </metadata>
+  <files>
+    <file src="bin\**" target="bin" />
+  </files>
+</package>
