@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -30,14 +31,19 @@
     <OutputPath>.\bin\Debug\</OutputPath>
     <RecursiveDeployAction>Ignore</RecursiveDeployAction>
     <SitecoreDeployFolder>C:\Asos\websites\Asos.Content.Sitecore</SitecoreDeployFolder>
-    <SitecoreWebUrl>http://dev.asos.content.sitecore</SitecoreWebUrl>
+    <SitecoreWebUrl>http://dev.asos.content.sitecore/</SitecoreWebUrl>
     <SitecoreAccessGuid>fff0c1b9-10b3-4994-a0bb-9099f5ef94cc</SitecoreAccessGuid>
     <InstallSitecoreConnector>True</InstallSitecoreConnector>
+    <DisableFileDeployment>False</DisableFileDeployment>
+    <EnableValidations>False</EnableValidations>
+    <ValidationSettingsFilePath>.\Asos.Content.Modules.PublishViewer.Data.Core_Debug.xml</ValidationSettingsFilePath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
     <OutputPath>.\bin\Release\</OutputPath>
     <RecursiveDeployAction>Ignore</RecursiveDeployAction>
+    <EnableValidations>False</EnableValidations>
+    <ValidationSettingsFilePath>.\Asos.Content.Modules.PublishViewer.Data.Core_Release.xml</ValidationSettingsFilePath>
   </PropertyGroup>
   <ItemGroup>
     <AssemblyAttributes Include="AssemblyFileVersion">
@@ -50,34 +56,52 @@
   <ItemGroup>
     <SitecoreItem Include="sitecore\content.item">
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ItemDeployment>DeployOnce</ItemDeployment>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Applications.item">
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ItemDeployment>DeployOnce</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Applications\Publish Viewer.item">
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Documents and settings.item">
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ItemDeployment>DeployOnce</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Documents and settings\All users.item">
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ItemDeployment>DeployOnce</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Documents and settings\All users\Start menu.item">
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ItemDeployment>DeployOnce</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Documents and settings\All users\Start menu\Left.item">
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ItemDeployment>DeployOnce</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Documents and settings\All users\Start menu\Left\Publish Viewer.item">
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\layout.item">
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+      <ItemDeployment>DeployOnce</ItemDeployment>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\layout\Layouts.item">
+      <ItemDeployment>DeployOnce</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\layout\Layouts\Applications.item">
+      <ItemDeployment>DeployOnce</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\layout\Layouts\Applications\PublishViewer.item">
+      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets" Condition="Exists('$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets')" />
 </Project>

@@ -10,5 +10,6 @@
   </metadata>
   <files>
     <file src="bin\**" target="bin" />
+    <file src="sitecore modules\PublishingViewer\**" target="sitecore modules\PublishingViewer" />
   </files>
 </package>
