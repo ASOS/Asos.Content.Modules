@@ -9,7 +9,8 @@
     <authors>ASOS</authors>
   </metadata>
   <files>
-    <file src="bin\**" target="bin" />
+    <file src="bin\**" target="lib\net45\" exclude="bin\**\*.xml" />
+    <file src="bin\**" target="lib\net451\" exclude="bin\**\*.xml" />
     <file src="sitecore modules\PublishingViewer\**" target="sitecore modules\PublishingViewer" />
   </files>
 </package>
