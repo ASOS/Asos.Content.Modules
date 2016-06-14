@@ -7,9 +7,6 @@
     <tags>Asos Content Modules Publish Viewer Shared Source</tags>
     <description>Adds dialog to view sitecore jobs queue.</description>
     <authors>ASOS</authors>
-    <references>
-      <reference file="Sitecore.PublishingViewer.dll" />
-    </references>  
   </metadata>
   <files>
     <file src="bin\**" target="bin" />
