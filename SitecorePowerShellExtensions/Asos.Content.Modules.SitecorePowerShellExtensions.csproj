@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{244DFF04-862C-47D8-93E7-FBD06CBB0F47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Asos.Content.Modules.SitecorePowershellExtensions</RootNamespace>
+    <AssemblyName>Asos.Content.Modules.SitecorePowershellExtensions</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cognifide.PowerShell">
+      <HintPath>..\Packages\SitecorePowershellExtensions\Cognifide.PowerShell.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognifide.PowerShell.Package">
+      <HintPath>..\Packages\SitecorePowershellExtensions\Cognifide.PowerShell.Package.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognifide.PowerShell.VersionSpecific">
+      <HintPath>..\Packages\SitecorePowershellExtensions\Cognifide.PowerShell.VersionSpecific.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Config\Include\Cognifide.PowerShell.config" />
+    <None Include="App_Config\Include\Cognifide.PowerShell.Events.config.disabled" />
+    <None Include="App_Config\Include\Cognifide.PowerShell.Minimal.config.disabled" />
+    <None Include="Asos.Content.Modules.SitecorePowershellExtensions.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="sitecore modules\PowerShell\Assets\Cognifide.PowerShell.dll-help.maml" />
+    <None Include="sitecore modules\PowerShell\Assets\Sitecore.Types.ps1xml" />
+    <None Include="sitecore modules\PowerShell\Assets\Sitecore.Views.ps1xml" />
+    <None Include="sitecore modules\PowerShell\Services\RemoteScriptCall.ashx" />
+    <None Include="sitecore modules\PowerShell\Services\web.config" />
+    <None Include="sitecore\shell\Themes\Standard\PowerShell.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sitecore modules\PowerShell\Assets\bg_left.gif" />
+    <Content Include="sitecore modules\PowerShell\Assets\bg_middle.gif" />
+    <Content Include="sitecore modules\PowerShell\Assets\bg_right.gif" />
+    <Content Include="sitecore modules\PowerShell\Assets\checked.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\coglogo.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\Download.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\error.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\fg_left.gif" />
+    <Content Include="sitecore modules\PowerShell\Assets\fg_middle.gif" />
+    <Content Include="sitecore modules\PowerShell\Assets\fg_right.gif" />
+    <Content Include="sitecore modules\PowerShell\Assets\highlight.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\ind-highlight.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\info.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\question.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\refresh.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\Splitter.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\stewie.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\unchecked.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\warning.png" />
+    <Content Include="sitecore modules\PowerShell\Assets\working.gif" />
+    <Content Include="sitecore modules\PowerShell\Layouts\VelocityScriptOutput.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ace.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\emmet-core\emmet.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-beautify.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-chromevox.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-elastic_tabstops_lite.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-emmet.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-error_marker.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-keybinding_menu.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-language_tools.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-linking.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-modelist.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-old_ie.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-searchbox.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-settings_menu.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-spellcheck.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-split.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-static_highlight.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-statusbar.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-textarea.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-themelist.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-whitespace.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\mode-powershell.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\snippets-powershell.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\snippets\powershell.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\snippets\text.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ace\theme-powershellise.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\console.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\flexie.min.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\ise.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\jquery-migrate-1.2.1.min.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\jquery-ui.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\jquery.mousewheel-min.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\jquery.qtip.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\jquery.qtip.min.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\jquery.terminal.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\jquery.VistaProgressBar-0.6.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\json2.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\listview.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\PsHSplitter.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\Runner.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\SpeShared.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\split.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\token_tooltip.js" />
+    <Content Include="sitecore modules\PowerShell\Scripts\VariablePrompt.js" />
+    <Content Include="sitecore modules\PowerShell\Services\PowerShellWebService.asmx" />
+    <Content Include="sitecore modules\PowerShell\Services\RemoteAutomation.asmx" />
+    <Content Include="sitecore modules\PowerShell\Styles\Console.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\Dialogs.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\flex.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\Gallery.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\IFrame.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\ise.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\jquery.qtip.min.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\jquery.terminal.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\jquery.ui.all.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\jquery.ui.autocomplete.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\jquery.ui.base.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\jquery.ui.core.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\jquery.ui.theme.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\ListView.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\Runner.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\ScriptBrowser.css" />
+    <Content Include="sitecore modules\PowerShell\Styles\VariablePrompt.css" />
+    <Content Include="sitecore modules\Shell\PowerShell\ConfirmChoice.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\ContextGallery.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\DownloadFile.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\GetStringResponse.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\MruGallery.SearchItem.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\MruGallery.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellConsole.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellExternalView.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellIse.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellMultiValuePrompt.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellResultViewerList.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellResultViewerText.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellRunner.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellScriptBrowser.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellVelociyOutput.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PsHSplitter.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\SessionIDGallery.Option.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\SessionIDGallery.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\UploadFile\PowerShellUploadFile.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="sitecore modules\Shell\PowerShell\UploadFile\PowerShellUploadFile.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\UploadFile\PowerShellUploadFile2.aspx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

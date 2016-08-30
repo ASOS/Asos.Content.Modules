@@ -1,0 +1,73 @@
+----item----
+version: 1
+id: {CB1D8D92-0889-4D06-8438-E2FD80CAE1C1}
+database: master
+path: /sitecore/system/Settings/Rules/Definitions/Elements/PowerShell ISE/Session State
+parent: {95323F20-ADAA-4354-B8BD-2D6FD847F205}
+name: Session State
+master: {00000000-0000-0000-0000-000000000000}
+template: {F0D16EEE-3A05-4E43-A082-795A32B873C0}
+templatekey: Condition
+created: 20160803T102511:636058167119270000
+
+----field----
+field: {AB51C8B2-F0E1-4471-9AAE-CC080D774923}
+name: Type
+key: type
+content-length: 78
+
+Cognifide.PowerShell.Core.Rules.PowerShellIseSessionState,Cognifide.PowerShell
+----version----
+language: en
+version: 1
+revision: 7b228502-8acd-465e-8873-8d24c1af7a18
+
+----field----
+field: {AF321234-4EB9-4EF5-9197-65903351939C}
+name: Text
+key: text
+content-length: 118
+
+when the edited script is [State,Tree,root={0C6821F1-3977-4427-9CAF-F963BB8E172D}&setRootAsSearchRoot=true,in a state]
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20121008T094900
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+7b228502-8acd-465e-8873-8d24c1af7a18
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20150630T000216:635712193363271484
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

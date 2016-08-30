@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+	    <id>Asos.Content.Modules.SitecorePowerShellExtensions.Core</id>
+	    <version>0.0.0</version>
+	    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	    <tags>Asos Content Modules PowerShell Shared Source</tags>
+	    <description>Sitecore items required for the Sitecore PowerShell Module</description>
+	    <authors>ASOS</authors>
+	</metadata>
+	<files>
+        <file src="..\output\**" target="" />
+	</files>
+</package>
