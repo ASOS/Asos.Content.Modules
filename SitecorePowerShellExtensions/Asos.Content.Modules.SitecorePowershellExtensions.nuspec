@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Asos.Content.Modules.SitecorePowerShellExtensions</id>
+    <version>0.0.0</version>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>Asos Content Modules PowerShell Shared Source</tags>
+    <description>Run Sitecore related PowerShell scripts within the Sitecore interface</description>
+    <authors>ASOS</authors>
+  </metadata>
+  <files>
+    <file src="bin\**\Cognifide.*" target="bin" />
+    <file src="App_Config\**" target="App_Config" />
+    <file src="sitecore\**" target="sitecore" />
+    <file src="sitecore modules\**" target="sitecore modules" />    
+  </files>
+</package>

@@ -1,0 +1,126 @@
+----item----
+version: 1
+id: {D74847BD-5789-47FB-9326-7332C0B66996}
+database: master
+path: /sitecore/system/Modules/PowerShell/Settings/ISE/sitecore/admin
+parent: {A51BBFDE-3B7C-47C3-BF9F-9256888DBEE2}
+name: admin
+master: {00000000-0000-0000-0000-000000000000}
+template: {69316117-03A6-4679-A34A-21E8CE8701D5}
+templatekey: PowerShell Console Settings
+created: 20160803T103441:636058172813770000
+
+----field----
+field: {F59378A5-F21D-4E07-B7DE-7986DDA3A510}
+name: HostWidth
+key: hostwidth
+content-length: 3
+
+240
+----field----
+field: {6F442AC9-7001-4124-9BC3-589875876C27}
+name: FontSize
+key: fontsize
+content-length: 2
+
+15
+----field----
+field: {F810EEC7-9A73-43E6-84C1-36E4951D2B3E}
+name: ForegroundColor
+key: foregroundcolor
+content-length: 5
+
+White
+----field----
+field: {AEEB1BB0-87B9-4E16-B5DE-D4CC544A992F}
+name: BackgroundColor
+key: backgroundcolor
+content-length: 8
+
+DarkBlue
+----field----
+field: {D0620274-D94D-4B13-BD66-CE3104DAEE0D}
+name: LastScript
+key: lastscript
+content-length: 584
+
+$languages =@(&quot;en-gb&quot;, &quot;en-au&quot;, &quot;en-us&quot;, &quot;de-de&quot;, &quot;fr-fr&quot;, &quot;it-it&quot;, &quot;es-es&quot;, &quot;ru-ru&quot;)
+foreach($language in $languages){
+    $allFolders = Get-Item -Language $language master: -Query &quot;/sitecore/content//*[@@templatename=&#39;Returns Service&#39; and @@name=&#39;Local Post Office&#39;]&quot; | foreach-object {$_.ServiceIcon = &#39;&lt;image mediaid=&quot;{62E81461-8AD8-4BE7-ADE7-8F816B5437A2}&quot;  height=&quot;&quot; width=&quot;&quot; hspace=&quot;&quot; vspace=&quot;&quot; /&gt;&#39; }
+}
+
+----field----
+field: {6209F0C2-E2B0-4F0C-95E3-037061CB866C}
+name: SaveLastScript
+key: savelastscript
+content-length: 1
+
+1
+----field----
+field: {06D5295C-ED2F-4A54-9BF2-26228D113318}
+name: __Icon
+key: __icon
+content-length: 23
+
+People/32x32/users1.png
+----version----
+language: en
+version: 1
+revision: 628fc790-ac1e-4547-8159-6aef023150b5
+
+----field----
+field: {86ECC435-0924-4EA0-92D8-CCA12ED7E644}
+name: FontFamily
+key: fontfamily
+content-length: 9
+
+monospace
+----field----
+field: {E81731F2-D79D-4F63-A36D-29502B0DC406}
+name: LiveAutocompletion
+key: liveautocompletion
+content-length: 1
+
+0
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20111016T133400
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+628fc790-ac1e-4547-8159-6aef023150b5
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 16
+
+20160819T121640Z
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

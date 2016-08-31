@@ -1,0 +1,96 @@
+----item----
+version: 1
+id: {785CB68F-0999-4543-A5E1-AFED0C152A17}
+database: master
+path: /sitecore/system/Modules/PowerShell/Script Library/Platform/Development/Integration points/Create Integration Points
+parent: {5398F7EA-3ECB-4C84-946E-49C63ECD8DCD}
+name: Create Integration Points
+master: {00000000-0000-0000-0000-000000000000}
+template: {DD22F1B3-BD87-4DB2-9E7D-F7A496888D43}
+templatekey: PowerShell Script
+created: 20160803T102436:636058166763370000
+
+----field----
+field: {B1A94FF0-6897-47C0-9C51-AA6ACB80B1F0}
+name: Script
+key: script
+content-length: 2326
+
+$integrationPoints = [Cognifide.PowerShell.Core.Modules.IntegrationPoints]::Libraries;
+Import-Function -Name Create-IntegrationPoint
+$options = New-Object System.Collections.Specialized.OrderedDictionary
+
+$integrationPoints.Values | % { $options.Add($_.Name, $_.Id) }
+
+if($module -eq $null){
+    $moduleEnabled = $true;
+    $result = Read-Variable -Parameters `
+        @{ Name = "moduleName"; Title="Name of the module"; Root="/sitecore/system/Modules/PowerShell/Script Library" },
+        @{ Name = "moduleEnabled"; Title="Enable module" },
+        @{ Name = "pointsToCreate"; Title="Integration points to create"; Options=$options; Editor="checklist"; Tip="Select the integration points for which the Script Libraries should be created."; Height="330px"} `
+        -Description "Pick the settings for the module that you will be creating and the integration points to include in it." `
+        -Title "Create a new module" -Width 500 -Height 630 -OkButtonName "Proceed" -CancelButtonName "Abort" -ShowHints
+
+    if($result -ne "ok")
+    {
+        Exit
+    }
+    
+    $moduleitem = New-Item -Path "master:/sitecore/system/Modules/PowerShell/Script Library/" -ItemType "Modules/PowerShell Console/PowerShell Script Module" -Name "$moduleName"
+    if($moduleitem -eq $null){
+        Show-Alert "$error"
+        Exit
+    }
+    Set-Variable -Name "module" -Scope Global -Value $moduleitem
+    if($moduleEnabled){    
+        $moduleitem.Enabled = "1";
+    }
+}
+else{
+    $result = Read-Variable -Parameters `
+        @{ Name = "pointsToCreate"; Title="Integration points to create"; Options=$options; Editor="checklist"; Tip="Select the integration points for which the Script Libraries should be created."} `
+        -Description "Pick the integration points you want to create Script libraries for. When you press OK all required script libraries for selected integration points will be created." `
+        -Title "Pick a module to populate" -Width 500 -Height 600 -OkButtonName "Proceed" -CancelButtonName "Abort" -ShowHints
+    if($result -ne "ok")
+    {
+        Exit
+    }
+}
+
+cd "$([Cognifide.PowerShell.Core.Settings.ApplicationSettings]::ScriptLibraryDb):\"
+foreach($pointToCreate in $pointsToCreate){
+    Execute-Script -Path $integrationPoints[$pointToCreate].CreationScript
+}
+----version----
+language: en
+version: 1
+revision: 32f01af0-e9d0-46c1-82af-8773d443723b
+
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20141203T021327
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+32f01af0-e9d0-46c1-82af-8773d443723b
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20150618T094616:635702175762043282
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin
