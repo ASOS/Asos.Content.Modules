@@ -15,9 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asos.Content.Modules.UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asos.Content.Modules.SitecorePowerShellExtensions", "SitecorePowershellExtensions\Asos.Content.Modules.SitecorePowerShellExtensions.csproj", "{244DFF04-862C-47D8-93E7-FBD06CBB0F47}"
 EndProject
-Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.SitecorePowerShellExtensions.Core", "SitecorePowershellExtensions.Core\Asos.Content.Modules.SitecorePowerShellExtensions.Core.scproj", "{B7B5C296-C2D4-425F-9DBC-B444C255A59C}"
+Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.SitecorePowerShellExtensions.Data.Core", "SitecorePowershellExtensions.Core\Asos.Content.Modules.SitecorePowerShellExtensions.Data.Core.scproj", "{B7B5C296-C2D4-425F-9DBC-B444C255A59C}"
 EndProject
-Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.SitecorePowerShellExtensions.Master", "SitecorePowershellExtensions.Master\Asos.Content.Modules.SitecorePowerShellExtensions.Master.scproj", "{7DB9FE0C-31BF-42B6-9930-1753D1187170}"
+Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.SitecorePowerShellExtensions.Data.Master", "SitecorePowershellExtensions.Master\Asos.Content.Modules.SitecorePowerShellExtensions.Data.Master.scproj", "{7DB9FE0C-31BF-42B6-9930-1753D1187170}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
