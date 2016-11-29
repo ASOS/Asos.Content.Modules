@@ -19,6 +19,10 @@ Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.Siteco
 EndProject
 Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.SitecorePowerShellExtensions.Data.Master", "SitecorePowershellExtensions.Master\Asos.Content.Modules.SitecorePowerShellExtensions.Data.Master.scproj", "{7DB9FE0C-31BF-42B6-9930-1753D1187170}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asos.Content.Modules.ItemUnlocker", "Asos.Content.Modules.ItemUnlocker\Asos.Content.Modules.ItemUnlocker.csproj", "{4AFF6386-154A-4289-9CD0-3A2FD18EEBD0}"
+EndProject
+Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "Asos.Content.Modules.ItemUnlocker.Data.Core", "Asos.Content.Modules.ItemUnlocker.Data.Core\Asos.Content.Modules.ItemUnlocker.Data.Core.scproj", "{0D0ED1CB-CA2E-45BE-8E74-D829C59A4FD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

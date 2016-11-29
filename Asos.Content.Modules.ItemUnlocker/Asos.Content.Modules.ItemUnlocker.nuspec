@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Asos.Content.Modules.ItemUnlocker</id>
+        <version>1.0.0</version>
+        <authors>Asos</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Action that let users unlock items that are locked by other users</description>
+    </metadata>
+  <files>
+    <file src="bin\**\Asos.Content.Modules.ItemUnlocker*.dll" target="bin" />
+    <file src="App_Config\Include\Asos.Content.Modules.ItemUnlocker.config" target="App_Config\Include\Asos.Content.Modules.ItemUnlocker.config"/>
+  </files>
+</package>
