@@ -8,13 +8,13 @@ name: Serialize Changes
 master: {00000000-0000-0000-0000-000000000000}
 template: {DD22F1B3-BD87-4DB2-9E7D-F7A496888D43}
 templatekey: PowerShell Script
-created: 20160803T102444:636058166848830000
+created: 20130819T122011Z
 
 ----field----
 field: {B1A94FF0-6897-47C0-9C51-AA6ACB80B1F0}
 name: Script
 key: script
-content-length: 7664
+content-length: 8153
 
 $monitoredDateFields = "__Created","__Updated","__Valid from","__Valid to","__Publish","__Unpublish","__Archive date","__Reminder date","__Archive Version date"
 $dryRun = $false;
@@ -72,7 +72,7 @@ function ConvertTo-LegacyDate {
 		}
 
 		if ($Recurse) {
-			#Write-Host "$($item.ProviderPath), Going deep" -f Cyan
+			Write-Verbose "$($item.ProviderPath), Going deep"
 			Get-ChildItem $item.ProviderPath -Recurse | ConvertTo-LegacyDate -Recurse
 		}
 	}
@@ -100,20 +100,23 @@ function Process-Item {
 		if ($PercentComplete -ne 0) {
 
 			$TheActivity = @{ $true = 'Deserializing '; $false = 'Serializing ' }[$updateItems] + "$Activity"
-			#Write-Host "$TheActivity $PercentComplete%" -Fo Yellow
+			Write-Verbose "$TheActivity $PercentComplete%"
 			Write-Progress -Activity $TheActivity -PercentComplete $PercentComplete
 		}
-		#Write-Host "$($item.ProviderPath), $Recurse"
-		ConvertTo-LegacyDate -Item $Item -Recurse:$Recurse
+		Write-Verbose "$($item.ProviderPath), $Recurse"
 
-		if (-not $dryRun) {
-			if ($updateItems) {
-				Import-Item $Item -Recurse:$Recurse -ForceUpdate
-			} else {
-				Export-Item $Item -Recurse:$Recurse
-			}
+		$allLangs = Get-Item -Path $Item.ProviderPath -Language *
+		foreach($langItem in $allLangs){
+    		ConvertTo-LegacyDate -Item $langItem -Recurse:$Recurse
 		}
 
+    	if (-not $dryRun) {
+    		if ($updateItems) {
+    			Import-Item $langItem -Recurse:$Recurse -ForceUpdate
+    		} else {
+    			Export-Item $langItem -Recurse:$Recurse
+    		}
+		}
 	}
 }
 
@@ -126,6 +129,7 @@ if (-not $dryRun -and -not $updateItems) {
 #Item templates
 Get-Item 'master:\templates\Modules' | Process-Item -Activity "Item templates " -PercentComplete 5
 Get-Item 'master:\templates\Modules\PowerShell Console' | Process-Item -Activity "Item templates" -PercentComplete 15 -Recurse
+Get-Item 'master:\templates\Modules\PowerShell Authorable Reports' | Process-Item -Activity "Item templates" -PercentComplete 15 -Recurse
 
 # Module Root
 Get-Item 'master:\system\Modules\PowerShell' | Process-Item -Activity "Module Root" -PercentComplete 35
@@ -147,7 +151,7 @@ Get-Item "master:\system\Settings\Rules\PowerShell" | Process-Item -Recurse -Act
 
 # Script Library
 Get-Item 'master:\system\Modules\PowerShell\Script Library' | Process-Item -Activity "Script Library" -PercentComplete 55
-$libraries = Get-ChildItem 'master:\system\Modules\PowerShell\Script Library'
+$libraries = Get-ChildItem 'master:\system\Modules\PowerShell\Script Library' | ? { -not $_.Name.StartsWith("__") } 
 $i = 0;
 $libraries | % { $i++; Process-Item -Item $_ -Recurse -Activity "Script Library: $($_.Name)" -PercentComplete (55 + 25 / $libraries.Count * $i) }
 
@@ -157,11 +161,13 @@ Get-ChildItem master:\system\Modules\PowerShell\Settings | Process-Item
 Get-Item "master:\system\Modules\PowerShell\Settings\*\All Users" | Process-Item
 
 # PowerShell Applications
-Get-Item core:\content\Applications\PowerShell | Process-Item -Recurse -Activity "PowerShell Applications" -PercentComplete 85
+Get-Item core:\content\Applications\PowerShell | Process-Item -Recurse -Activity "PowerShell Applications" -PercentComplete 82
+
+# PowerShell Dictionary - translation strings
+Get-Item core:\system\Dictionary\PowerShell | Process-Item -Recurse -Activity "PowerShell Applications" -PercentComplete 85
 
 # PowerShell Application Layouts
-Get-Item 'core:\layout\Layouts\Applications\PowerShell*' | Process-Item -Recurse -Activity "PowerShell Application Layouts" -PercentComplete 87
-Get-Item 'master:\layout\Layouts\PowerShell' | Process-Item -Recurse
+Get-Item 'core:\layout\Layouts\Applications\PowerShell' | Process-Item -Recurse -Activity "PowerShell Application Layouts" -PercentComplete 87
 
 # Start Menu icons
 Get-Item 'core:\content\Documents and settings\All users\Start menu\Right\Development Tools\PowerShell ISE' | Process-Item -Activity "Start Menu icons" -PercentComplete 90
@@ -179,7 +185,9 @@ Get-Item 'core:\content\Applications\Content Editor\Context Menues\Default\Conte
 Get-Item 'core:\client\Applications\Launchpad\PageSettings\Buttons\ContentEditing\PowerShell ISE' | Process-Item -Activity "Launchpad Integration" -PercentComplete 95
 
 # Tasks integration
-Get-Item 'master:\system\Tasks\Commands\PowerShellScriptCommand' | Process-Item -Activity "Content Tasks integration" -PercentComplete 100
+Get-Item 'master:\system\Tasks\Commands\PowerShellScriptCommand' | Process-Item -Activity "Content Tasks integration" -PercentComplete 97
+
+$null = Get-Role -Identity 'sitecore\PowerShell Extensions Remoting' | Export-Role
 
 if ($showIcons) {
 	if ($officeIcons.Keys.Count -gt 0) {
@@ -194,7 +202,7 @@ if ($showIcons) {
 ----version----
 language: en
 version: 1
-revision: d61ac374-5727-4ca0-89e2-a5e6bc07d9e7
+revision: 0cae83e5-0a76-4626-87f4-f2f68b9508fd
 
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
@@ -209,14 +217,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-d61ac374-5727-4ca0-89e2-a5e6bc07d9e7
+0cae83e5-0a76-4626-87f4-f2f68b9508fd
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 15
+content-length: 16
 
-20160131T094444
+20170605T102349Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

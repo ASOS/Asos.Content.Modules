@@ -8,32 +8,20 @@ name: PowerShell Background Session Manager
 master: {00000000-0000-0000-0000-000000000000}
 template: {DD22F1B3-BD87-4DB2-9E7D-F7A496888D43}
 templatekey: PowerShell Script
-created: 20160803T102457:636058166970600000
+created: 20131216T120030Z
 
 ----field----
 field: {B1A94FF0-6897-47C0-9C51-AA6ACB80B1F0}
 name: Script
 key: script
-content-length: 1111
+content-length: 862
 
 Close-Window
 $sessions = Get-ScriptSession
 $current = Get-ScriptSession -Current
 
-function Get-StateField{
-    param(
-        [string]$state
-        )
-  if($state -match "Available") {
-      return "<span style='color:green'>$state</span>"
-  }
-  elseif($state -match "Busy") {
-      return "<span style='color:red'>$state</span>"
-  }
-  else {
-      return $state
-  }
-}
+Invoke-Script "Platform\Reusable\Get-StateField"
+
 $sessions | ? { $current.ID -ne $_.ID } |
     Show-ListView -Property `
         @{Label="Icon"; Expression={"powershell/32x32/powershell.png" } }, 
@@ -54,10 +42,17 @@ key: __icon
 content-length: 26
 
 Software/32x32/console.png
+----field----
+field: {DEC8D2D5-E3CF-48B6-A653-8E69E2716641}
+name: __Security
+key: __security
+content-length: 112
+
+ar|sitecore\Developer|pe|+item:read|pd|+item:read|ar|sitecore\Sitecore Client Users|pe|-item:read|pd|-item:read|
 ----version----
 language: en
 version: 1
-revision: f593f22e-17df-4541-914a-f7bb94edb175
+revision: b8ce1fdb-f82f-42e8-b733-7b3dfedd1aed
 
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
@@ -72,14 +67,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-f593f22e-17df-4541-914a-f7bb94edb175
+b8ce1fdb-f82f-42e8-b733-7b3dfedd1aed
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 15
 
-20151228T052755
+20170305T203020
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

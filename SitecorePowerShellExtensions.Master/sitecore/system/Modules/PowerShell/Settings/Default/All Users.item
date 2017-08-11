@@ -8,7 +8,7 @@ name: All Users
 master: {00000000-0000-0000-0000-000000000000}
 template: {69316117-03A6-4679-A34A-21E8CE8701D5}
 templatekey: PowerShell Console Settings
-created: 20160803T102511:636058167113730000
+created: 20111016T103400Z
 
 ----field----
 field: {F59378A5-F21D-4E07-B7DE-7986DDA3A510}
@@ -17,6 +17,20 @@ key: hostwidth
 content-length: 3
 
 200
+----field----
+field: {6F442AC9-7001-4124-9BC3-589875876C27}
+name: FontSize
+key: fontsize
+content-length: 2
+
+14
+----field----
+field: {86ECC435-0924-4EA0-92D8-CCA12ED7E644}
+name: FontFamily
+key: fontfamily
+content-length: 6
+
+Monaco
 ----field----
 field: {F810EEC7-9A73-43E6-84C1-36E4951D2B3E}
 name: ForegroundColor
@@ -41,8 +55,15 @@ People/32x32/users1.png
 ----version----
 language: en
 version: 1
-revision: d2b14d55-74ea-4079-b223-ff5742393bdb
+revision: 70190ab5-39a6-4adc-990c-096384076d6f
 
+----field----
+field: {B5E02AD9-D56F-4C41-A065-A133DB87BDEB}
+name: __Display name
+key: __display name
+content-length: 9
+
+All Users
 ----field----
 field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
 name: __Owner
@@ -56,7 +77,7 @@ name: __Created
 key: __created
 content-length: 15
 
-20111016T133400
+20111016T113400
 ----field----
 field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
 name: __Created by
@@ -70,14 +91,68 @@ name: __Revision
 key: __revision
 content-length: 36
 
-d2b14d55-74ea-4079-b223-ff5742393bdb
+70190ab5-39a6-4adc-990c-096384076d6f
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 34
+content-length: 15
 
-20120907T152459:634826282999958111
+20160829T212251
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin
+----version----
+language: ja-JP
+version: 1
+revision: ca7bc7a2-6ee3-4225-ab04-63310c241d4f
+
+----field----
+field: {B5E02AD9-D56F-4C41-A065-A133DB87BDEB}
+name: __Display name
+key: __display name
+content-length: 8
+
+すべてのユーザー
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20160829T010235
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+ca7bc7a2-6ee3-4225-ab04-63310c241d4f
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 15
+
+20160829T010242
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

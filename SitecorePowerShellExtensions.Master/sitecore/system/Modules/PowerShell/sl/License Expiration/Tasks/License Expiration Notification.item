@@ -8,13 +8,13 @@ name: License Expiration Notification
 master: {00000000-0000-0000-0000-000000000000}
 template: {DD22F1B3-BD87-4DB2-9E7D-F7A496888D43}
 templatekey: PowerShell Script
-created: 20160803T102424:636058166643430000
+created: 20150531T214821Z
 
 ----field----
 field: {B1A94FF0-6897-47C0-9C51-AA6ACB80B1F0}
 name: Script
 key: script
-content-length: 933
+content-length: 930
 
 param([string]$name="Good morning")
 $license = [Sitecore.Reflection.Nexus]::LicenseApi
@@ -23,7 +23,7 @@ $date = [Sitecore.DateUtil]::IsoDateToDateTime($license.Expiration)
 $PSEmailServer = [Sitecore.Configuration.Settings]::MailServer
 
 $email = @{
-    To = "Michael West < michaellwest@gmail.com >"
+    To = "License Manager < noreply@test.com >"
     From = "SPE Team < noreply@spe.com >"
     Subject = "Sitecore license expiration : $($date.ToString('MM/dd/yyyy'))"
     BodyAsHtml = $true

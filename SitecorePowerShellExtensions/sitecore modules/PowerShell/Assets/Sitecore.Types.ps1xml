@@ -32,6 +32,58 @@
           </PropertySet>
         </Members>
       </MemberSet>
+      <ScriptProperty>
+        <Name>ProviderPath</Name>
+        <GetScriptBlock>
+          [Cognifide.PowerShell.Core.Utility.PathUtilities]::GetProviderPath($this)
+        </GetScriptBlock>
+      </ScriptProperty>          
+      <ScriptProperty>
+        <Name>BaseTemplate</Name>
+        <GetScriptBlock>
+          [Sitecore.Data.Managers.TemplateManager]::GetTemplate($this).GetBaseTemplates()
+        </GetScriptBlock>
+      </ScriptProperty>
+      <PropertySet>
+        <Name>PSImage</Name>
+        <ReferencedProperties>
+          <Name>Name</Name>
+          <Name>Id</Name>
+          <Name>Alt</Name>
+          <Name>Width</Name>
+          <Name>Height</Name>
+          <Name>Extension</Name>
+          <Name>Size</Name>
+        </ReferencedProperties>
+      </PropertySet>
+      <PropertySet>
+        <Name>PSTemplate</Name>
+        <ReferencedProperties>
+          <Name>Name</Name>
+          <Name>Id</Name>
+          <Name>BaseTemplate</Name>
+        </ReferencedProperties>
+      </PropertySet>
+      <PropertySet>
+        <Name>PSSchedule</Name>
+        <ReferencedProperties>
+          <Name>Name</Name>
+          <Name>Id</Name>
+          <Name>Schedule</Name>
+          <Name>Last Run</Name>
+          <Name>Command</Name>
+          <Name>Items</Name>
+        </ReferencedProperties>
+      </PropertySet>
+      <PropertySet>
+        <Name>PSSecurity</Name>
+        <ReferencedProperties>
+          <Name>Name</Name>
+          <Name>Id</Name>
+          <Name>__Owner</Name>
+          <Name>__Security</Name>
+        </ReferencedProperties>
+      </PropertySet>
     </Members>
   </Type>
   <Type>
@@ -149,5 +201,94 @@
         </Members>
       </MemberSet>
     </Members>
-  </Type> 
+  </Type>
+  <Type>
+    <Name>Sitecore.Security.Accounts.User</Name>
+    <Members>
+      <MemberSet>
+        <Name>PsStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>Name</Name>
+              <Name>Domain</Name>
+              <Name>IsAdministrator</Name>
+              <Name>IsAuthenticated</Name>             
+              <Name>IsEnabled</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+      <ScriptProperty>
+        <Name>IsEnabled</Name>
+        <GetScriptBlock>
+          [System.Web.Security.Membership]::GetUser($this.Name).IsApproved
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Roles</Name>
+        <GetScriptBlock>
+          [Sitecore.Security.Accounts.RolesInRolesManager]::GetRolesForUser($this, $false)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <AliasProperty>
+        <Name>MemberOf</Name>
+        <ReferencedMemberName>Roles</ReferencedMemberName>
+      </AliasProperty>
+    </Members>
+  </Type>
+  <Type>
+    <Name>Sitecore.Security.Accounts.Role</Name>
+    <Members>
+      <MemberSet>
+        <Name>PsStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>Name</Name>
+              <Name>Domain</Name>
+              <Name>IsEveryone</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+      <ScriptProperty>
+        <Name>Roles</Name>
+        <GetScriptBlock>
+          [Sitecore.Security.Accounts.RolesInRolesManager]::GetRolesForRole($this, $false)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <AliasProperty>
+        <Name>MemberOf</Name>
+        <ReferencedMemberName>Roles</ReferencedMemberName>
+      </AliasProperty>
+    </Members>
+  </Type>  
+  <Type>
+    <Name>Sitecore.Data.Clones.Notification</Name>
+    <Members>
+      <MemberSet>
+        <Name>PsStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>ID</Name>
+              <Name>Processed</Name>
+              <Name>Type</Name>
+              <Name>Ury</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+      <ScriptProperty>
+        <Name>Type</Name>
+        <GetScriptBlock>
+          $this.GetType().Name
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>  
 </Types>

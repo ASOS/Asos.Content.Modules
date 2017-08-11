@@ -8,24 +8,26 @@ name: Prepare Console Distribution
 master: {00000000-0000-0000-0000-000000000000}
 template: {DD22F1B3-BD87-4DB2-9E7D-F7A496888D43}
 templatekey: PowerShell Script
-created: 20160803T102444:636058166841000000
+created: 20130510T140325Z
 
 ----field----
 field: {B1A94FF0-6897-47C0-9C51-AA6ACB80B1F0}
 name: Script
 key: script
-content-length: 10144
+content-length: 11882
 
 # Clear test items:
 # Get-ChildItem 'master:\system\Modules\PowerShell\Script Library' -recurse | Where-Object {  ($_.Name -match '\(test\)') } | Remove-Item
 
-if([Cognifide.PowerShell.Core.VersionDecoupling.VersionResolver]::IsVersionHigherOrEqual([Cognifide.PowerShell.Core.VersionDecoupling.VersionResolver]::SitecoreVersion80)){
-  $sitecore7Warning = ""
+Invoke-Script -Path "master:\system\Modules\PowerShell\Script Library\Platform\Development\PowerShell Extensions Maintenance\Set up Runner Window Chrome"
+Invoke-Script -Path "master:\system\Modules\PowerShell\Script Library\Platform\Development\PowerShell Extensions Maintenance\Recover Version Specific Icons"
+
+if([CurrentSitecoreVersion]::IsAtLeast([SitecoreVersion]::V80)){
+  $sitecore7Warning = "" 
 } else {
-  (Get-Item "core:\content\Applications\PowerShell\PowerShell Runner").Chrome = "WindowChrome"    
   $sitecore7Warning = @"
 ******************************************************
-If you are on Sitecore 7.0 or lower - after installing 
+If you are on Sitecore 7.0 - after installing 
 the package please run the script located under 
 the following path in your Script Library:
 
@@ -41,8 +43,8 @@ $Version = "$((Get-Host).Version.Major).$((Get-Host).Version.Minor)"
 $package = new-package "Sitecore PowerShell Extensions";
 $package.Sources.Clear();
 
-$package.Metadata.Author = "Adam Najmanowicz - Cognifide, Michael West";
-$package.Metadata.Publisher = "Cognifide Limited";
+$package.Metadata.Author = "Adam Najmanowicz, Michael West";
+$package.Metadata.Publisher = "Sitecore PowerShell Extensions Team";
 $package.Metadata.Version = $Version;
 $package.Metadata.Readme = '
 This module provides 2 immediately usable interfaces 
@@ -73,20 +75,20 @@ http://bit.ly/ScPsIss
 
 Thank you for using Sitecore PowerShell Extensions.
 
-Copyright (c) 2010-2015 Adam Najmanowicz - Cognifide
-Copyright (c) 2013-2015 Michael West
+Copyright (c) 2010-2017 Adam Najmanowicz
+Copyright (c) 2013-2017 Michael West
 
-http://www.cognifide.com/
+https://sitecorepowershell.com/
 http://blog.najmanowicz.com/
 http://michaellwest.blogspot.com/'
 
 # Item templates
-$source = Get-Item 'master:\templates\Modules' | New-ItemSource -Name 'Master Item Templates Module Node' -InstallMode Overwrite
+$source = Get-Item 'master:\templates\Modules' | New-ItemSource -Name 'Master Item Templates Module Node' -InstallMode Merge -MergeMode Merge
 $source = Get-Item 'master:\templates\Modules\PowerShell Console' | New-ItemSource -Name 'Master Item Templates' -InstallMode Overwrite
 $package.Sources.Add($source);
 
 # Rules engine taxonomy templates for Sitecore 7.0 that misses it
-if(-not [Cognifide.PowerShell.Core.VersionDecoupling.VersionResolver]::IsVersionHigherOrEqual([Cognifide.PowerShell.Core.VersionDecoupling.VersionResolver]::SitecoreVersion80)){
+if([SitecoreVersion]::Current -lt [SitecoreVersion]::V80){
   $source = Get-Item 'master:\templates\System\Rules\Taxonomy' | New-ItemSource -Name 'Rules Engine Taxonomy' -InstallMode Skip -SkipVersions
   $package.Sources.Add($source);
   Write-Host "Adding rules engine taxonomy templates" -ForegroundColor Green
@@ -135,7 +137,11 @@ $package.Sources.Add($source);
 # Script Library
 $source = Get-Item 'master:\system\Modules\PowerShell\Script Library' | New-ExplicitItemSource -Name "Master Script Library" -InstallMode Merge -MergeMode Clear
 $package.Sources.Add($source);
-$source = Get-ChildItem 'master:\system\Modules\PowerShell\Script Library' -recurse | New-ExplicitItemSource -Name "Master Script Library Content" -InstallMode  Overwrite
+$source = Get-ChildItem 'master:\system\Modules\PowerShell\Script Library' | 
+    ? { -not ($_.Name -eq "Authorable Reports") } | # Skip Authorable Reports
+    ? { -not ($_.Name.StartsWith("__")) } | # Skip test libraries
+    %{ Get-ChildItem "$($_.ProviderPath)" -WithParent -Recurse} | 
+    New-ExplicitItemSource -Name "Master Script Library Content" -InstallMode  Overwrite
 $package.Sources.Add($source);
 
 # Settings
@@ -146,25 +152,26 @@ $package.Sources.Add($source);
 $source = Get-Item core:\content\Applications\PowerShell | New-ItemSource -Name "Applications" -InstallMode Overwrite
 $package.Sources.Add($source);
 
-# Application Layouts
-$source = Get-Item 'core:\layout\Layouts\Applications\*PowerShell*' | New-ExplicitItemSource "Application Layouts" -InstallMode Overwrite
+# PowerShell Dictionary - translation strings
+$source = Get-Item core:\system\Dictionary\PowerShell | New-ItemSource -Name "Applications" -InstallMode Overwrite
 $package.Sources.Add($source);
 
-$source = Get-Item 'master:\layout\Layouts\PowerShell' | New-ItemSource "Master Layouts" -InstallMode Overwrite
+# Application Layouts
+$source = Get-ChildItem 'core:\layout\Layouts\Applications\PowerShell' -WithParent | New-ExplicitItemSource "Application Layouts" -InstallMode Overwrite
 $package.Sources.Add($source);
 
 # Start Menu
-$source = Get-ChildItem '*PowerShell*' -path 'core:/content/Documents and settings/All users/Start menu/'  -Recurse | New-ExplicitItemSource "Start Menu Icons" -InstallMode Overwrite
+$source = Get-ChildItem '*PowerShell*' -path 'core:/content/Documents and settings/All users/Start menu/' -Recurse | New-ExplicitItemSource "Start Menu Icons" -InstallMode Overwrite
 $package.Sources.Add($source);
 
 # Content Editor Context Menu integration
-$source = Get-ChildItem '*PowerShell*' -path 'core:/content/Applications/Content Editor/Context Menues/Default/'  -Recurse | New-ExplicitItemSource "Content Editor Context Menu integration #1" -InstallMode Merge -MergeMode Clear
+$source = Get-ChildItem '*PowerShell*' -path 'core:/content/Applications/Content Editor/Context Menues/Default/' -Recurse | New-ExplicitItemSource "Content Editor Context Menu integration #1" -InstallMode Merge -MergeMode Clear
 $package.Sources.Add($source);
 $source = Get-Item 'core:/content/Applications/Content Editor/Context Menues/Default/Edit Script/' | New-ExplicitItemSource "Content Editor Context Menu integration #2" -InstallMode Merge -MergeMode Clear
 $package.Sources.Add($source);
 
 # LaunchPad
-if([Cognifide.PowerShell.Core.VersionDecoupling.VersionResolver]::IsVersionHigherOrEqual([Cognifide.PowerShell.Core.VersionDecoupling.VersionResolver]::SitecoreVersion80)){
+if([CurrentSitecoreVersion]::IsAtLeast([SitecoreVersion]::V80)){
 $source = Get-Item 'core:/sitecore/client/Applications/Launchpad/PageSettings/Buttons/ContentEditing/PowerShell ISE' | New-ItemSource -Name "LaunchPad integration" -InstallMode Overwrite
 $package.Sources.Add($source);
 }
@@ -174,7 +181,7 @@ $source = Get-Item master:\system\Tasks\Commands\PowerShellScriptCommand | New-I
 $package.Sources.Add($source);
 
 # Files
-$source = Get-Item "$AppPath\App_Config\Include\Cognifide.PowerShell*.*" | New-ExplicitFileSource -Name "Disabled Configuration Files"
+$source = Get-Item "$AppPath\App_Config\Include\Cognifide.PowerShell*.*" | ? {-not $_.Name.Contains("Serialization") } | New-ExplicitFileSource -Name "Configuration Files"
 $package.Sources.Add($source);
 $source = Get-Item "$AppPath\bin\Cognifide.PowerShell*.dll" | New-ExplicitFileSource -Name "PowerShell Binaries"
 $package.Sources.Add($source);
@@ -184,6 +191,11 @@ $source = Get-ChildItem -exclude *.cs -Path "$AppPath\sitecore modules\PowerShel
 $package.Sources.Add($source);
 $source = Get-ChildItem -exclude *.cs -Path "$AppPath\sitecore modules\Shell\PowerShell\" -filter "*.*" -Recurse -File | New-ExplicitFileSource -Name "Console Controls"
 $package.Sources.Add($source);
+
+#Security Roles
+$source = Get-Role -Identity "PowerShell Extensions Remoting" | New-SecuritySource -Name "Remoting Role" 
+$package.Sources.Add($source);
+
 
 $packageName = "$($package.Name)-$Version for Sitecore $($SitecoreVersion.Major)";
 Export-Package -Project $package -Path "$packageName.xml"
@@ -198,7 +210,7 @@ $minimalPackageName = "$($SitecorePackageFolder)\SPE Minimal-$($Version) for Sit
 
 Compress-Archive -Path "$($AppPath)App_Config" -DestinationPath $minimalPackageName -Include "Cognifide.PowerShell.config", "Cognifide.PowerShell.Minimal.config.disabled" | Out-Null
 Compress-Archive -Path "$($AppPath)bin" -DestinationPath $minimalPackageName -Include "Cognifide.PowerShell.dll", "Cognifide.PowerShell.VersionSpecific.dll" -Update | Out-Null
-Compress-Archive -Path "$($AppPath)sitecore modules" -DestinationPath $minimalPackageName -Include "web.config", "RemoteAutomation.asmx" -Update | Out-Null
+Compress-Archive -Path "$($AppPath)sitecore modules" -DestinationPath $minimalPackageName -Include "web.config", "RemoteAutomation.asmx", "RemoteScriptCall.ashx" -Update | Out-Null
 
 # Build Remoting Package
 
@@ -208,10 +220,48 @@ if(Test-Path -Path $remotingSourcePath) {
     
     Compress-Archive -Path "$($remotingSourcePath)\Modules\SPE\" -DestinationPath $remotingPackageName | Out-Null
 }
+
+$Version = "$((Get-Host).Version.Major).$((Get-Host).Version.Minor)"
+
+# Build Standard Package
+
+$package = new-package "Sitecore PowerShell Extensions - Authorable Reports";
+$package.Sources.Clear();
+
+$package.Metadata.Author = "Adam Najmanowicz, Michael West";
+$package.Metadata.Publisher = "Sitecore PowerShell Extensions Team";
+$package.Metadata.Version = $Version;
+$package.Metadata.Readme = '
+This module provides 2 reports based on 
+Sitecore PowerShell Extensions module available from the 
+SPE Toolbox in the "Start" menu on Desktop.
+The reports are:
+- Index Viewer
+- Rule Based Report
+
+Thank you for using Sitecore PowerShell Extensions.
+
+Copyright (c) 2010-2016 Adam Najmanowicz
+Copyright (c) 2013-2016 Michael West
+
+https://sitecorepowershell.com/
+http://blog.najmanowicz.com/
+http://michaellwest.blogspot.com/'
+
+# Item templates
+$source = Get-Item 'master:\templates\Modules\PowerShell Authorable Reports' | New-ItemSource -Name 'Master Item Templates' -InstallMode Overwrite
+$package.Sources.Add($source);
+
+$source = Get-Item 'master:\system\Modules\PowerShell\Script Library\Authorable Reports' | New-ItemSource -Name 'Master Item Templates' -InstallMode Overwrite
+$package.Sources.Add($source);
+
+$packageName = "$($package.Name)-$Version";
+Export-Package -Project $package -Path "$packageName.zip" -Zip
+
 ----version----
 language: en
 version: 1
-revision: 35112653-562a-47fa-b442-02467eaf4285
+revision: 7157776a-0d40-4a63-87aa-f56485cd9c47
 
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
@@ -226,14 +276,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-35112653-562a-47fa-b442-02467eaf4285
+7157776a-0d40-4a63-87aa-f56485cd9c47
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 15
+content-length: 16
 
-20160212T134311
+20170606T105438Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

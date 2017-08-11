@@ -25,6 +25,10 @@ html {
     z-index: -1
 }
 
+#terminal * {
+    font-family: inherit !important;
+}
+
 .middleArea pre, .resultsArea pre { margin: 4px; }
 
 .console {
@@ -32,6 +36,7 @@ html {
     border: none;
     color: #fff;
     font-size: 12px;
+    font-weight: normal;
     margin: 0;
     overflow: auto;
     white-space: pre-wrap;
@@ -44,7 +49,6 @@ html {
 }
 
 #Result {
-    /* padding: 0px !important; */
     margin: 0 !important;
     padding: 3px 0 2px 3px !important;
     position: relative;
@@ -58,7 +62,7 @@ html {
     bottom: 0;
 }
 
-#Result pre { 
+#ScriptResult pre { 
     margin: 4px 2px !important; 
     z-index: 0;
     position: absolute;
@@ -236,7 +240,7 @@ html {
 
 #ProgressOverlay {
     left: 0;
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
     color: black;

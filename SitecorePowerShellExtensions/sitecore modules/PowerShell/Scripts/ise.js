@@ -18,7 +18,7 @@
             "You can search for keywords using the <strong>Ctrl+F</strong> hotkey.",
             "You can toggle a comment block using the <strong>Ctrl+Shift+/</strong> hotkey.",
             "You can toggle a comment using the <strong>Ctrl+/</strong> hotkey.",
-            "You can find more documentation in the Sitecore PowerShell Extensions <a href='http://sitecorepowershell.gitbooks.io/sitecore-powershell-extensions/' target='_blank'>book</a>."
+            "You can find more documentation in the Sitecore PowerShell Extensions <a href='http://doc.sitecorepowershell.com/' target='_blank'>book</a>."
         ];
 
         var TokenTooltip = ace.require("tooltip").TokenTooltip;
@@ -39,6 +39,32 @@
         codeeditor.setShowPrintMargin(false);
         codeeditor.session.setValue(editor.val());
         codeeditor.tokenTooltip = new TokenTooltip(codeeditor);
+
+        var proxied = codeeditor.onPaste;
+        codeeditor.onPaste = function () {
+            var result = proxied.apply(this, arguments);
+            cognifide.powershell.updateRibbon();
+            return result;
+        };
+
+
+        function registerEventListenersForRibbonButtons() {
+            console.log('initialize');
+            [].forEach.call(document.querySelectorAll('.scRibbonToolbarSmallGalleryButton, .scRibbonToolbarLargeComboButtonBottom'), function (div) {
+                div.addEventListener("click", function () {
+                    clearTimeout(typingTimer);
+                })
+            });
+
+            [].forEach.call(document.querySelectorAll('.scRibbonNavigatorButtonsGroupButtons > a'), function (div) {
+                div.addEventListener("click", function () {
+                    cognifide.powershell.updateRibbon();
+                })
+            });
+        }
+
+        registerEventListenersForRibbonButtons();
+
         codeeditor.session.on("change", function () {
             editor.val(codeeditor.session.getValue());
 
@@ -62,28 +88,29 @@
 			return match && decodeURIComponent(match[1].replace(/\+/g, " "));
 		}
 
-        $("body").on("click", "#HelpClose", function() {
-            $("#ajax-dialog").dialog("close");
-        });
-
 		if(getQueryStringValue("sc_bw") === "1"){
 			$("#RibbonPanel").css("padding-top","50px");
 			$("#Wrapper").css("padding-top","0px");
 		}
         setTimeout(setFocusOnConsole, 1000);
         });
-	
+
         var typingTimer;
 
         cognifide.powershell.updateRibbon = function () {
             if (!codeeditor.getReadOnly()) {
-                window.scForm.postRequest("", "", "", "ise:scriptchanged(modified=" + !codeeditor.session.getUndoManager().isClean() + ")");
+                scForm.postRequest("", "", "", "ise:scriptchanged(modified=" + !codeeditor.session.getUndoManager().isClean() + ")");
+                registerEventListenersForRibbonButtons();
             }
         };
 
         cognifide.powershell.updateRibbonNeeded = function () {
             clearTimeout(typingTimer);
-            typingTimer = setTimeout(cognifide.powershell.updateRibbon, 2000);
+            var timeout = 2000;
+            if (document.querySelector('.scGalleryFrame') != null) {
+                var timeout = 20;
+            }
+            typingTimer = setTimeout(cognifide.powershell.updateRibbon, timeout);
         };
 
         var posx = $("#PosX");
@@ -168,7 +195,7 @@
                     var line = codeeditor.session.getTextRange(range);
 
                     if (line) {
-                            
+
                         if (!$.tabCompletions || !$.lastPrefix || $.lastPrefix.length === 0 || prefix.indexOf($.lastPrefix) !== 0) {
                             $.lastPrefix = prefix;
                             _getTabCompletions(line);
@@ -255,19 +282,7 @@
                     }
                     var command = codeeditor.session.getTextRange(range);
                     if (command) {
-                        _getCommandHelp(command);
-                        var ajaxDialog = $("<div id=\"ajax-dialog\"/>").html($.commandHelp).appendTo("body");
-                        ajaxDialog.dialog({
-                            modal: true,
-                            close: function(event, ui) {
-                                $(this).remove();
-                            },
-                            height: $(window).height() - 20,
-                            width: $(window).width() * 18 / 20,
-                            show: "slow",
-                            hide: "slow"
-                        });
-                        $("#ajax-dialog").scrollTop("0");
+                        cognifide.powershell.showCommandHelp(command);
                     }
                 },
                 readOnly: true
@@ -313,13 +328,13 @@
         cognifide.powershell.appendOutput = function(outputToAppend) {
             var decoded = $("<div/>").html(outputToAppend).text();
             $("#ScriptResultCode").append(decoded);
-            $("#ScriptResult").scrollTop($("#ScriptResult")[0].scrollHeight);
+            $("#Result").scrollTop($("#Result")[0].scrollHeight);
         };
 
         cognifide.powershell.changeFontFamily = function(setting) {
             setting = setting || "Monaco";
             codeeditor.setOption("fontFamily", setting);
-            $("#ScriptResult pre").css({ "font-family": setting });
+            document.getElementById("ScriptResult").style.fontFamily = setting;
         };
 
         cognifide.powershell.changeBackgroundColor = function (setting) {
@@ -327,7 +342,7 @@
             $("#Result").css({ "background-color": setting });
         };
 
-        cognifide.powershell.changeSettings = function(fontFamily, fontSize, backgroundColor, bottomOffset, liveAutocompletion) {            
+        cognifide.powershell.changeSettings = function(fontFamily, fontSize, backgroundColor, bottomOffset, liveAutocompletion) {
             cognifide.powershell.changeBackgroundColor(backgroundColor);
             cognifide.powershell.changeFontFamily(fontFamily);
             cognifide.powershell.changeFontSize(fontSize);
@@ -365,9 +380,9 @@
             if (set) {
                 codeeditor.session.setBreakpoint(row);
             } else {
-                codeeditor.session.clearBreakpoint(row);                
+                codeeditor.session.clearBreakpoint(row);
             }
-            scForm.postEvent(this, event, "ise:togglebreakpoint(line=" + row + ",state=" + set + ")");
+            scForm.postRequest("", "", "", "ise:togglebreakpoint(line=" + row + ",state=" + set + ")");
         }
 
         cognifide.powershell.breakpointSet = function(row, action) {
@@ -406,11 +421,17 @@
             scContent.ribbonNavigatorButtonClick(this, event, "PowerShellRibbon_Strip_ImageStrip");
         }
 
-        window.scForm.postRequest("", "", "", "ise:updatesettings");
+        scForm.postRequest("", "", "", "ise:updatesettings");
 
         cognifide.powershell.updateEditor = function() {
             codeeditor.getSession().setValue(editor.val());
             cognifide.powershell.clearBreakpoints();
+        };
+
+        cognifide.powershell.scriptExecutionEnded = function () {
+            if (cognifide.powershell.preventCloseWhenRunning) {
+                cognifide.powershell.preventCloseWhenRunning(false);
+            }
         };
 
         cognifide.powershell.clearBreakpoints = function() {
@@ -444,11 +465,32 @@
 
         cognifide.powershell.resizeEditor = function() {
             codeeditor.resize();
-            var resultsHeight =$ise(window).height() -$ise("#ResultsSplitter").height() - $ise("#ResultsSplitter").height()-$ise("#StatusBar").height()-$ise("#CodeEditor").height()-$ise("#RibbonPanel").height()-resultsBottomOffset;
-	    $ise("#Result").height(resultsHeight);
-	    $ise("#Result").width($ise(window).width()-$ise("#Result").offset().left*2)
-
+            var resultsHeight =$ise(window).height() -$ise("#ResultsSplitter").offset().top - $ise("#ResultsSplitter").height() - $ise("#StatusBar").height() - resultsBottomOffset - 10;
+	        $ise("#Result").height(resultsHeight);
+	        $ise("#Result").width($ise(window).width()-$ise("#Result").offset().left*2)
+            $ise("#ProgressOverlay").css("top",($ise("#Result").offset().top+4)+"px");
+            $ise("#ResultsClose").css("top", ($ise("#Result").offset().top + 4) + "px");
         };
+
+        function isEmpty(val) {
+            return (val === undefined || val == null || val.length <= 0) ? true : false;
+        }
+
+        cognifide.powershell.showInfoPanel = function(showPanel, updateFromMessage) {
+            if (showPanel) {
+                $ise("#InfoPanel").css("display", "block");
+            } else {
+                $ise("#InfoPanel").css("display", "none");
+            }
+            cognifide.powershell.resizeEditor();
+            if (!isEmpty(updateFromMessage)) {
+                scForm.invoke(updateFromMessage+"(elevationResult=1)");
+            }
+        }
+
+        cognifide.powershell.requestElevation = function() {
+                scForm.postRequest("", "", "", "ise:requestelevation");
+        }
 
         cognifide.powershell.restoreResults = function() {
             $("#ResultsSplitter").show();
@@ -487,9 +529,18 @@
 
         cognifide.powershell.showCommandHelp = function(command) {
             _getCommandHelp(command);
-            var ajaxDialog = $("<div id=\"ajax-dialog\"/>").html($.commandHelp).appendTo("body");
-            ajaxDialog.dialog({
+            if (cognifide.powershell.ajaxDialog)
+                cognifide.powershell.ajaxDialog.remove();
+            cognifide.powershell.ajaxDialog = $("<div id=\"ajax-dialog\"/>").append("<div id=\"HelpClose\">X</div>").append($.commandHelp).appendTo("body");
+            cognifide.powershell.ajaxDialog.dialog({
                 modal: true,
+                open: function () {
+                    $(this).scrollTop("0");
+
+                    $("#HelpClose, .ui-widget-overlay").on("click", function () {
+                        cognifide.powershell.ajaxDialog.dialog("close");
+                    });
+                },
                 close: function(event, ui) {
                     $(this).remove();
                 },
@@ -498,15 +549,11 @@
                 show: "slow",
                 hide: "slow"
             });
-            $("#ajax-dialog").scrollTop("0");
-            $("#HelpClose").click(function() {
-                $("#HelpClose").hide("slow", function() { $("#HelpClose").remove(); });
-            });
+
             return false;
         };
 
         $.commandHelp = "";
-        $("#Help").dialog({ autoOpen: false });
 
         cognifide.powershell.changeWindowTitle($("#ScriptName")[0].innerHTML, false);
         var tipIndex = Math.floor(Math.random() * tips.length);
@@ -569,6 +616,9 @@
         }
 
         function getPowerShellResponse(callData, remotefunction, doneFunction, errorFunction) {
+            if(remotefunction != "GetVariableValue"){
+                cognifide.powershell.requestElevation();
+            };
             var datastring = JSON.stringify(callData);
             $.ajax({
                     type: "POST",
@@ -585,7 +635,7 @@
 
 	$(window).on('resize', function(){
 	    cognifide.powershell.resizeEditor();
-        }).trigger('resize'); 
+        }).trigger('resize');
 
     });
 }(jQuery, window, window.cognifide = window.cognifide || {}, window.ace = window.ace || {}));

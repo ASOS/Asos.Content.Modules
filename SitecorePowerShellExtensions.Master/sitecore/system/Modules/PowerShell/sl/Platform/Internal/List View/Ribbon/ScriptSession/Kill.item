@@ -8,7 +8,7 @@ name: Kill
 master: {00000000-0000-0000-0000-000000000000}
 template: {DD22F1B3-BD87-4DB2-9E7D-F7A496888D43}
 templatekey: PowerShell Script
-created: 20160803T102455:636058166955530000
+created: 20131216T120349Z
 
 ----field----
 field: {1C76313E-3C8C-4807-A826-135D10C39299}
@@ -28,11 +28,13 @@ content-length: 11
 field: {B1A94FF0-6897-47C0-9C51-AA6ACB80B1F0}
 name: Script
 key: script
-content-length: 332
+content-length: 397
 
 foreach($session in $selectedData){
     $session.Dispose();
 }
+
+Invoke-Script "Platform\Reusable\Get-StateField"
 
 $sessions = Get-ScriptSession
 $current = Get-ScriptSession -Current
@@ -54,7 +56,7 @@ People/16x16/skull.png
 ----version----
 language: en
 version: 1
-revision: 769b2831-557f-4777-8006-9bdb99ebdbc2
+revision: 3fee617e-1331-42cf-97b6-c4adbbd7b23a
 
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
@@ -69,18 +71,18 @@ name: __Revision
 key: __revision
 content-length: 36
 
-769b2831-557f-4777-8006-9bdb99ebdbc2
+3fee617e-1331-42cf-97b6-c4adbbd7b23a
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 34
+content-length: 15
 
-20141027T184059:635500320592414609
+20170112T170319
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
 key: __updated by
 content-length: 14
 
-sitecore\admin
+sitecore\Admin

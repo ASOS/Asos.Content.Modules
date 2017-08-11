@@ -55,6 +55,8 @@
         });
       </script>
 
+      <Literal ID="CustomStyles" />
+
       <Border class="scFlexColumnContainer scStretch">
         <Border class="scDialogHeader">
           <ThemedImage Src="powershell/32x32/powershell.png" class="psVarPromptHeaderIcon" Visible="false" />
@@ -72,6 +74,12 @@
 
         <Scrollbox Class="scFlexContent">
           <Scrollbox ID="ValuePanel" Class="scStretchAbsolute scDialogContentContainer">
+            <Border class="scWizardWarning" def:content="Notifications" ID="NoDataWarning">
+              <ThemedImage src="/sitecore modules/PowerShell/Assets/info.png" />
+              <Border style="display:flex;">
+                <Literal class="scEditorWarningText" Text="The data for the dialog is not available. Either your server was restarted or the server cache was flushed. If this is a recurring problem, contact your system administrator." ID="Warning" />
+              </Border>
+            </Border>
             <!--GridPanel ID="ValuePanel" GridPanel.Class="EntryGrid" GridPanel.ID="EntryGrid" Columns="1" Cellpadding="2px"-->
             <Tabstrip ID="Tabstrip" Visible="false"></Tabstrip>
             <!--/GridPanel-->
@@ -80,8 +88,6 @@
         <div Class="scFormDialogFooter">
           <Image ID="Copyright" src="/sitecore modules/PowerShell/Assets/question.png" Alt="Show copyright..."
                  Title="Show copyright..." />
-          <Literal ID="PromoLiteral"
-                   Text="Sitecore PowerShell Extensions (c) 2010-2015 &lt;a href='http://blog.najmanowicz.com/' target='_blank'&gt;Adam Najmanowicz&lt;/a&gt; - &lt;a href='http://www.cognifide.com' target='_blank'&gt;Cognifide&lt;/a&gt;, &lt;a href='http://michaellwest.blogspot.com/' target='_blank'&gt;Michael West&lt;/a&gt;." />
           <div class="footerOkCancel">
             <Button ID="OKButton" Class="scButton scButtonPrimary" KeyCode="13" Click="OkClick" Header="OK" />
             <Button ID="CancelButton" Class="scButton" KeyCode="27" Click="CancelClick" Header="Cancel" />&#160;&#160;&#160;

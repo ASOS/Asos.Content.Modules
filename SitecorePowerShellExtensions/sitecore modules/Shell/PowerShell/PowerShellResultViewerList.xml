@@ -28,10 +28,8 @@
       <div class="scFlexColumnContainer scHeight100">
         <Border ID="RibbonPanel" GridPanel.Width="100%" class="scEditorWarningPanelTable" />
         <Border class="scEditorWarning" ID="InfoPanel">
-          <GridPanel border="0" Width="100%" cellpadding="0" cellspacing="0" class="scEditorWarningPanelTable"
-                     Columns="2">
-            <Image ID="InfoIcon" Src="/sitecore modules/PowerShell/Assets/info.png" Width="24" Height="24"
-                   Class="scEditorWarningIcon" />
+          <GridPanel border="0" Width="100%" cellpadding="0" cellspacing="0" class="scEditorWarningPanelTable" Columns="2">
+            <Image ID="InfoIcon" Src="/sitecore modules/PowerShell/Assets/info.png" Width="24" Height="24" Class="scEditorWarningIcon" />
             <Border GridPanel.Width="100%">
               <Border class="scEditorWarningTitle">
                 <Literal ID="InfoTitle" />
@@ -56,8 +54,7 @@
                               Multiselect="true" runat="server">
           </PowerShellListView>
           <Border ID="EmptyPanel" border="0" class="emptyResultsPanel" Visible="false">
-            <Image ID="EmptyIcon" Src="/sitecore modules/PowerShell/Assets/error.png" Width="64" Height="64"
-                   Class="scEditorWarningIcon" Alt="Error icon" />
+            <Image ID="EmptyIcon" Src="/sitecore modules/PowerShell/Assets/error.png" Class="scEditorWarningIcon" Alt="Error icon" />
             <Border class="emptyResultsText" GridPanel.Width="100%" ID="EmptyDataMessage">
               <Literal ID="EmptyDataMessageText" Text="No items available" Visible="false" />
             </Border>

@@ -8,7 +8,7 @@ name: Platform
 master: {00000000-0000-0000-0000-000000000000}
 template: {6D82FCD8-C379-443C-97A9-C6423C71E7D5}
 templatekey: PowerShell Script Module
-created: 20160803T102431:636058166713100000
+created: 20141203T085000Z
 
 ----field----
 field: {218CA464-CB77-4C97-B141-34871ECAE00B}
@@ -44,10 +44,17 @@ key: __icon
 content-length: 27
 
 Software/32x32/jar_bean.png
+----field----
+field: {BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}
+name: __Sortorder
+key: __sortorder
+content-length: 4
+
+1850
 ----version----
 language: en
 version: 1
-revision: acb0c4f2-0655-4f9d-965b-9677cc251157
+revision: 787e2389-9194-49fb-ad3b-1fc2b63a7c70
 
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
@@ -62,14 +69,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-acb0c4f2-0655-4f9d-965b-9677cc251157
+787e2389-9194-49fb-ad3b-1fc2b63a7c70
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 34
+content-length: 15
 
-20150613T214726:635698288464194871
+20161130T234557
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

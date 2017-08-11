@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Cognifide.PowerShell.config" />
+    <None Include="App_Config\Include\Cognifide.PowerShell.config" />
     <None Include="App_Config\Include\Cognifide.PowerShell.Events.config.disabled" />
     <None Include="App_Config\Include\Cognifide.PowerShell.Minimal.config.disabled" />
     <None Include="Asos.Content.Modules.SitecorePowershellExtensions.nuspec">
@@ -65,14 +65,19 @@
     <None Include="sitecore modules\PowerShell\Assets\Sitecore.Views.ps1xml" />
     <None Include="sitecore modules\PowerShell\Services\RemoteScriptCall.ashx" />
     <None Include="sitecore modules\PowerShell\Services\web.config" />
+    <None Include="sitecore modules\PowerShell\web.config" />
     <None Include="sitecore\shell\Themes\Standard\PowerShell.zip" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Asos.Content.Modules.SitecorePowershellExtensions.dll" />
+    <Content Include="bin\Asos.Content.Modules.SitecorePowershellExtensions.pdb" />
+    <Content Include="bin\Cognifide.PowerShell.dll" />
+    <Content Include="bin\Cognifide.PowerShell.Package.dll" />
+    <Content Include="bin\Cognifide.PowerShell.VersionSpecific.dll" />
     <Content Include="sitecore modules\PowerShell\Assets\bg_left.gif" />
     <Content Include="sitecore modules\PowerShell\Assets\bg_middle.gif" />
     <Content Include="sitecore modules\PowerShell\Assets\bg_right.gif" />
     <Content Include="sitecore modules\PowerShell\Assets\checked.png" />
-    <Content Include="sitecore modules\PowerShell\Assets\coglogo.png" />
     <Content Include="sitecore modules\PowerShell\Assets\Download.png" />
     <Content Include="sitecore modules\PowerShell\Assets\error.png" />
     <Content Include="sitecore modules\PowerShell\Assets\fg_left.gif" />
@@ -84,13 +89,9 @@
     <Content Include="sitecore modules\PowerShell\Assets\question.png" />
     <Content Include="sitecore modules\PowerShell\Assets\refresh.png" />
     <Content Include="sitecore modules\PowerShell\Assets\Splitter.png" />
-    <Content Include="sitecore modules\PowerShell\Assets\stewie.png" />
     <Content Include="sitecore modules\PowerShell\Assets\unchecked.png" />
     <Content Include="sitecore modules\PowerShell\Assets\warning.png" />
     <Content Include="sitecore modules\PowerShell\Assets\working.gif" />
-    <Content Include="sitecore modules\PowerShell\Layouts\VelocityScriptOutput.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="sitecore modules\PowerShell\Scripts\ace\ace.js" />
     <Content Include="sitecore modules\PowerShell\Scripts\ace\emmet-core\emmet.js" />
     <Content Include="sitecore modules\PowerShell\Scripts\ace\ext-beautify.js" />
@@ -159,6 +160,8 @@
     <Content Include="sitecore modules\Shell\PowerShell\ContextGallery.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\DownloadFile.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\GetStringResponse.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\LanguageGallery.Option.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\LanguageGallery.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\MruGallery.SearchItem.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\MruGallery.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\PowerShellConsole.xml" />
@@ -169,15 +172,15 @@
     <Content Include="sitecore modules\Shell\PowerShell\PowerShellResultViewerText.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\PowerShellRunner.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\PowerShellScriptBrowser.xml" />
-    <Content Include="sitecore modules\Shell\PowerShell\PowerShellVelociyOutput.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\PowerShellSessionElevation.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\PsHSplitter.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\SessionIDGallery.Option.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\SessionIDGallery.xml" />
-    <Content Include="sitecore modules\Shell\PowerShell\UploadFile\PowerShellUploadFile.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    <Content Include="sitecore modules\Shell\PowerShell\UploadFile\PowerShellUploadFile.aspx" />
     <Content Include="sitecore modules\Shell\PowerShell\UploadFile\PowerShellUploadFile.xml" />
     <Content Include="sitecore modules\Shell\PowerShell\UploadFile\PowerShellUploadFile2.aspx" />
+    <Content Include="sitecore modules\Shell\PowerShell\UserGallery.Option.xml" />
+    <Content Include="sitecore modules\Shell\PowerShell\UserGallery.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,6 +9,6 @@
 	    <authors>ASOS</authors>
 	</metadata>
 	<files>
-        <file src="..\output\**" target="" />
+        <file src="bin\Package_Release\**" target="" />
 	</files>
 </package>

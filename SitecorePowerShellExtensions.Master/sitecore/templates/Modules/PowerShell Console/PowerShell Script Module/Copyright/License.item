@@ -8,7 +8,7 @@ name: License
 master: {00000000-0000-0000-0000-000000000000}
 template: {455A3E98-A627-4B40-8035-E683A0331AC7}
 templatekey: Template field
-created: 20160803T102352:636058166329930000
+created: 20141101T104712Z
 
 ----field----
 field: {AB162CC0-DC80-4ABF-8871-998EE5D7BA32}
@@ -36,13 +36,6 @@ language: en
 version: 1
 revision: ab97778f-36c9-4f54-b4de-f5a9d176a405
 
-----field----
-field: {19A69332-A23E-4E70-8D16-B2640CB24CC8}
-name: Title
-key: title
-content-length: 7
-
-License
 ----field----
 field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
 name: __Owner
